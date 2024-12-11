@@ -21,6 +21,20 @@ function Utils.GenerateNewNumber()
     return validNumber
 end
 
+function Utils.GenerateSerialNumber(length)
+    local charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    if type(length) ~= 'number' then length = 6 end
+
+    local serial = ''
+    for i = 1, length do
+        serial = serial .. charset:sub(math.random(1, #charset), 1)
+    end
+
+    return serial
+end
+
+--[[ INITIALISATION ]]
+
 local frameworks = {
     'standalone',
     'esx'
