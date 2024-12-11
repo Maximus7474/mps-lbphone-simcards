@@ -16,10 +16,13 @@ jobs:
     
     steps:
 
+      - name: Debug file location
+        run: ls -la
+
       - name: Update version in fxmanifest.lua
         run: |
           TAG=${{ steps.get_vars.outputs.TAG }}
-          sed -i "s/version '.*'/version '${TAG}'/" fxmanifest.lua
+          sed -i "s/version '.*'/version '${TAG}'/" ./fxmanifest.lua
 
       - name: Manifest version
         run: |
