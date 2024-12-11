@@ -1,4 +1,4 @@
-fx_version 'cerulean'
+fx_version ''
 game 'gta5'
 
 lua54 'yes'
@@ -6,7 +6,7 @@ lua54 'yes'
 author 'Maximus7474'
 repository 'https://www.github.com/Maximus7474/lb-phone-simcards'
 
-version '0.0.0'
+version ''
 
 files {
     'locales/*.json'
