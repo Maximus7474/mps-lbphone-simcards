@@ -17,7 +17,7 @@ end)
 
 ## Item Setup:
 > Ox Inventory Item:
-> ```lua
+```lua
     ['simcard'] = {
         label = 'Sim Card',
         weight = 50,
