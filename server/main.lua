@@ -1,11 +1,9 @@
-print((('server/frameworks/%s.lua'):format(Config.Framework)), (('server/inventories/%s.lua'):format(Config.Item.Inventory)))
-
-local Framework = require (('server/frameworks/%s'):format(Config.Framework))
-local Inventory = Config.Item.Inventory ~= 'auto' and require (('server/inventories/%s'):format(Config.Item.Inventory)) or {}
 local Utils = require ('server/functions/utils')
 
+local Framework = Utils.GetFramework(Config.Framework) or {}
+local Inventory = Utils.GetInventory(Config.Item.Inventory) or {}
 if not Framework then
-    return lib.print.error('Unable to load framework, this script will not work !')
+    return lib.print.error(('Unable to load framework (%s), this script will not work !'):format())
 end
 
 if Inventory.RegisterItemCB then

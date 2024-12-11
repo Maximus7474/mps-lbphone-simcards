@@ -21,4 +21,75 @@ function Utils.GenerateNewNumber()
     return validNumber
 end
 
+local frameworks = {
+    'standalone',
+    'esx'
+}
+
+local function IsFrameworkCompatible(invName)
+    local status, obj = pcall(function ()
+        return require (('server/frameworks/%s'):format(invName))
+    end)
+
+    return status, obj
+end
+
+function Utils.GetFramework(rawEntry)
+    if rawEntry ~= 'auto' then
+        local status, obj = IsFrameworkCompatible(rawEntry)
+
+        if not status then
+            lib.print.error(('The configured framework (%s) is not supported by this script, please add it.'):format(rawEntry))
+            return false
+        else
+            return obj
+        end
+    end
+
+    for _, framework in pairs(frameworks) do
+        local status, obj = IsFrameworkCompatible(framework)
+        if status then
+            return obj
+        end
+    end
+
+    lib.print.error('No adapted framework was found !')
+
+    return false
+end
+
+local inventories = {
+    'ox_inventory'
+}
+
+local function IsInventoryCompatible(invName)
+    local status, obj = pcall(function ()
+        return require (('server/inventories/%s'):format(invName))
+    end)
+
+    return status, obj
+end
+
+function Utils.GetInventory(rawEntry)
+    if rawEntry ~= 'auto' then
+        local status, obj = IsInventoryCompatible(rawEntry)
+
+        if not status then
+            lib.print.error(('The configured inventory (%s) is not supported by this script, please add it.'):format(rawEntry))
+            return false
+        else
+            return obj
+        end
+    end
+
+    for _, inv in pairs(inventories) do
+        local status, obj = IsInventoryCompatible(inv)
+        if status then
+            return obj
+        end
+    end
+
+    return false
+end
+
 return Utils
