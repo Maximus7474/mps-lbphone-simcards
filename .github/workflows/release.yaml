@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  create-release:
+    name: Build and Create Tagged release
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      - name: Update version in fxmanifest.lua
+        run: |
+          TAG=${{ steps.get_vars.outputs.TAG }}
+          sed -i "s/version '.*'/version '${TAG}'/" fxmanifest.lua
+
+      - name: Manifest version
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add fxmanifest.lua
+          git commit -m "Update version to ${{ github.ref_name }}"
+          git push
+
+      - name: Bundle files
+        run: |
+          zip -r ${{ github.event.repository.name }}.zip . -x "./.git/*" "./.github/*"
+
+      - name: Create Release
+        uses: 'marvinpinto/action-automatic-releases@v1.2.1'
+        id: auto_release
+        with:
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          title: '${{ env.RELEASE_VERSION }}'
+          prerelease: false
+          files: ${{ github.event.repository.name }}.zip
+
+        env:
+          CI: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
