@@ -5,17 +5,14 @@ local ox_inv = exports.ox_inventory
 ---@param cb function
 function INV.RegisterItemCB(cb)
     exports('simcard', function (event, item, inventory, slot, data)
-        -- lib.print.info('item', item)
-        -- lib.print.info('slot', slot)
-        -- lib.print.info('data', data)
-        if event == 'usedItem' then
-            cb(inventory.id, data?.lbPhoneNumber, slot)
+        if event == 'usingItem' then
+            cb(inventory.id, inventory.items[slot].metadata.lbPhoneNumber, slot)
         end
     end)
 end
 
 function INV.UpdateSimCardNumber(source, slot, number)
-    ox_inv:SetMetadata(source, slot, {lbPhoneNumber = number})
+    ox_inv:SetMetadata(source, slot, {lbPhoneNumber = number, lbFormattedNumber = exports['lb-phone']:FormatNumber(number)})
 end
 
 function INV.RemoveItem(source, slot)
