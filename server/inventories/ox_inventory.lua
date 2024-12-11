@@ -1,5 +1,7 @@
 local INV = {}
 
+local Utils = require 'server/functions/utils'
+
 local ox_inv = exports.ox_inventory
 
 ---@param cb function
@@ -35,6 +37,23 @@ function INV.ClearCurrentNumber(source, itemName, currentNumber)
     local item = ox_inv:GetSlotWithItem(source, itemName, {lbPhoneNumber = currentNumber}, false)
 
     ox_inv:SetMetadata(source, item.slot, {})
+end
+
+if Config.Debug then 
+    RegisterCommand('givesim', function (source, args, raw)
+        local number = args[1] or Utils.GenerateNewNumber()
+
+        local metadata = {
+            lbPhoneNumber = number,
+            lbFormattedNumber = exports['lb-phone']:FormatNumber(number)
+        }
+
+        print('Giving Sim with number:', json.encode(metadata))
+
+        ox_inv:AddItem(
+            source, Config.SimCard.ItemName, 1, metadata
+        )
+    end)
 end
 
 return INV
