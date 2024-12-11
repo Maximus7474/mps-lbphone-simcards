@@ -7,7 +7,6 @@ if not Framework then
 end
 
 if Inventory.RegisterItemCB then
-    print('Registering Usable Item to Inventory')
     Inventory.RegisterItemCB(
         function (source, newNumber, slot)
             if not newNumber then newNumber = Utils.GenerateNewNumber() end
@@ -35,7 +34,6 @@ if Inventory.RegisterItemCB then
         end
     )
 elseif Framework.RegisterUsableItem then
-    print('Registering Usable Item to Framework')
     Framework.RegisterUsableItem(
         function (source)
             local newNumber = Utils.GenerateNewNumber()

@@ -2,8 +2,6 @@ local INV = {}
 
 local ox_inv = exports.ox_inventory
 
-print('Loaded ox_inv')
-
 ---@param cb function
 function INV.RegisterItemCB(cb)
     exports('simcard', function (event, item, inventory, slot, data)
