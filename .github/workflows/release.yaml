@@ -27,7 +27,7 @@ jobs:
 
       - name: Update version in fxmanifest.lua
         run: |
-          sed -i "s/version '.*'/version '${{ github.ref_name }}'/" ./fxmanifest.lua
+          sed -i "/^version /s/'[^']*'/'${{ github.ref_name }}'/" ./fxmanifest.lua
 
       - name: Manifest version
         run: |
