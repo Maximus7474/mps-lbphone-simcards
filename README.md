@@ -1,5 +1,12 @@
 # LB Sim Cards
 
+<!--
+> ToDo:
+> - [ ] Locale integration
+> - [ ] Add Other Frameworks
+> - [ ] Add Other Inventories
+-->
+
 ## Setup
 
 Add the following code into `@lb-phone/client/custom/functions/functions.lua` at the end of the file:
