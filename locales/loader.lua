@@ -12,7 +12,7 @@ end
 
 locale = json.decode(rawContent)[IsDuplicityVersion() and 'SERVER' or 'CLIENT']
 
-function T(key)
+function T(key, args)
     local keys = {}
     for str in string.gmatch(key, "([^%.]+)") do
         keys[#keys+1] = str
@@ -25,5 +25,11 @@ function T(key)
             return key
         end
     end
-    return localizedString
+
+    local formatedString = localizedString:gsub("%b{}", function(match)
+        local key = match:sub(2, -2)
+        return args[key] or ""
+    end)
+
+    return formatedString
 end

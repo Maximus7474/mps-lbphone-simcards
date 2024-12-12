@@ -10,13 +10,13 @@ RegisterNetEvent('lbphonesim:changingsimcard', function (newNumber)
         lbphone:SetPhone(newNumber, false)
     end)
     if not status then
-        lib.print.error('Setting the new number failed !', err)
+        lib.print.error(T('DEBUG.SETTING_NUMBER_FAILED'), err)
         return
     end
 
     lbphone:SendNotification({
         app = "Settings",
-        title = "Sim Card Changed",
-        content = ("Your phone number has changed to %s"):format(lbphone:FormatNumber(newNumber)),
+        title = T('NOTIFICATIONS.NUMBER_CHANGED.TITLE'),
+        content = T('NOTIFICATIONS.NUMBER_CHANGED.DESCRIPTION', {number = lbphone:FormatNumber(newNumber)}),
     })
 end)

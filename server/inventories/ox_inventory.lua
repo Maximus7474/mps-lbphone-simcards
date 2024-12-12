@@ -48,7 +48,7 @@ if Config.Debug then
             lbFormattedNumber = exports['lb-phone']:FormatNumber(number)
         }
 
-        print('Giving Sim with number:', json.encode(metadata))
+        print(T('DEBUG.GIVESIM'), json.encode(metadata))
 
         ox_inv:AddItem(
             source, Config.SimCard.ItemName, 1, metadata

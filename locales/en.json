@@ -1,8 +1,18 @@
 {
     "CLIENT": {
-
+        "NOTIFICATIONS": {
+            "NUMBER_CHANGED": {
+                "TITLE": "Sim Card Changed",
+                "DESCRIPTION": "Your phone number has changed to {number}"
+            }
+        },
+        "DEBUG": {
+            "SETTING_NUMBER_FAILED": "Setting the new number failed !"
+        }
     },
     "SERVER": {
-        
+        "DEBUG": {
+            "GIVESIM": "Giving Sim with number:"
+        }
     }
 }
