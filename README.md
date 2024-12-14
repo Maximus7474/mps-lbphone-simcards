@@ -33,3 +33,7 @@ end)
         server = { export = "lb-phone-simcards.simcard" },
     }
 ```
+> ESX:
+```sql
+INSERT INTO `esx-scripting-server`.`items` (`name`, `label`) VALUES ('simcard', 'Sim Card');
+```
