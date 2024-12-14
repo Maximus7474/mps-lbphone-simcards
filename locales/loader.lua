@@ -20,7 +20,7 @@ function T(key, args)
 
     local localizedString = locale
     for _, keyPart in ipairs(keys) do
-        localizedString = locale[keyPart]
+        localizedString = localizedString[keyPart]
         if localizedString == nil then
             return key
         end
