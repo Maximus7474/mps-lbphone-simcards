@@ -6,7 +6,7 @@ lua54 'yes'
 author 'Maximus7474'
 repository 'https://www.github.com/Maximus7474/lb-phone-simcards'
 
-version 'v0.1.1'
+version 'v0.1.2'
 
 files {
     'locales/*.json'
