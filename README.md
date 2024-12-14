@@ -1,11 +1,9 @@
 # LB Sim Cards
 
-<!--
 > ToDo:
-> - [ ] Locale integration
+> - [x] Locale integration
 > - [ ] Add Other Frameworks
 > - [ ] Add Other Inventories
--->
 
 ## Setup
 
