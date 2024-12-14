@@ -40,16 +40,18 @@ if Inventory.RegisterItemCB then
         end
     )
 elseif Framework.RegisterUsableItem then
+    --[[ Wouldn't be used for unique items ]]
     Framework.RegisterUsableItem(
         function (source)
             local newNumber = Utils.GenerateNewNumber()
+            local currentNumber = exports['lb-phone']:GetEquippedPhoneNumber(source)
 
             TriggerClientEvent('lbphonesim:changingsimcard', source, newNumber)
 
-            if Config.Item.Unique then
-                local currentNumber = exports['lb-phone']:GetEquippedPhoneNumber(source)
-                Inventory.SetNewNumber(source, Config.Item.Name, currentNumber, newNumber)
-            end
+            local rows = MySQL.update.await('UPDATE phone_phones SET id = ? WHERE phone_number = ?', {currentNumber, currentNumber})
+            local success = rows == 1
+
+            if success then TriggerClientEvent('lbphonesim:changingsimcard', source, newNumber) end
         end
     )
 end
