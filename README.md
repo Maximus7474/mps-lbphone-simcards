@@ -1,7 +1,7 @@
 # LB Sim Cards
 
 > ToDo:
-> - [x] Locale integration
+> - [x] ~~Locale integration~~
 > - [ ] Add Other Frameworks
 > - [ ] Add Other Inventories
 
