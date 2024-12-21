@@ -37,8 +37,10 @@ end)
         close = true,
         consume = 0,
         server = { export = "lb-phone-simcards.simcard" },
+        client = {image = 'simcard.png'}
     }
 ```
+add simcard.png into ox_inventory/web/images
 > ESX:
 ```sql
 INSERT INTO `esx-scripting-server`.`items` (`name`, `label`) VALUES ('simcard', 'Sim Card');
