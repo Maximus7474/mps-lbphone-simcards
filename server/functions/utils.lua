@@ -36,9 +36,12 @@ end
 
 --[[ INITIALISATION ]]
 
+
 local frameworks = {
     'standalone',
-    'esx'
+    'esx',
+    'qbox',
+    'qb'
 }
 
 local function IsFrameworkCompatible(invName)
