@@ -35,6 +35,7 @@ end)
         weight = 50,
         stack = false,
         close = true,
+        consume = 0,
         server = { export = "lb-phone-simcards.simcard" },
     }
 ```

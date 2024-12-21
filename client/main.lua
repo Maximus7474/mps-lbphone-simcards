@@ -1,6 +1,6 @@
 local lbphone = exports['lb-phone']
 
-RegisterNetEvent('lbphonesim:changingsimcard', function (newNumber)
+lib.callback.register('lbphonesim:changingsimcard', function (newNumber)
     if lbphone:IsOpen() then
         lbphone:ToggleOpen(false, false)
     end
@@ -11,7 +11,7 @@ RegisterNetEvent('lbphonesim:changingsimcard', function (newNumber)
     end)
     if not status then
         lib.print.error(T('DEBUG.SETTING_NUMBER_FAILED'), err)
-        return
+        return err
     end
 
     lbphone:SendNotification({
@@ -19,4 +19,6 @@ RegisterNetEvent('lbphonesim:changingsimcard', function (newNumber)
         title = T('NOTIFICATIONS.NUMBER_CHANGED.TITLE'),
         content = T('NOTIFICATIONS.NUMBER_CHANGED.DESCRIPTION', {number = lbphone:FormatNumber(newNumber)}),
     })
+
+    return true
 end)
