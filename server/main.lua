@@ -13,8 +13,6 @@ if Inventory.RegisterItemCB then
 
             if Config.SimCard.ReplaceSimCardNumber then
                 Inventory.UpdateSimCardNumber(source, slot, currentNumber)
-            elseif Config.SimCard.DeleteSimCard then
-                Inventory.RemoveItem(source, slot)
             end
             local success = false
             if Config.Item.Unique then
@@ -36,7 +34,18 @@ if Inventory.RegisterItemCB then
                 success = rows == 1
             end
 
-            if success then TriggerClientEvent('lbphonesim:changingsimcard', source, newNumber or Utils.GenerateNewNumber()) end
+            if not success then return end
+
+            lib.callback('lbphonesim:changingsimcard', source, function (response)
+                if response == true then
+                    if Config.SimCard.DeleteSimCard then
+                        Inventory.RemoveItem(source, slot)
+                    end
+                    return
+                end
+
+                lib.print.error('Unable to change phone number for ' .. source .. ', failed with error:', response)
+            end, newNumber or Utils.GenerateNewNumber())
         end
     )
 elseif Framework.RegisterUsableItem then
