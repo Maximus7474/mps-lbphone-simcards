@@ -41,7 +41,11 @@ end
 
 if Config.Debug then 
     RegisterCommand('givesim', function (source, args, raw)
-        local number = args[1] or Utils.GenerateNewNumber()
+        local number = tonumber(args[1])
+
+        if not number or #args[1] ~= exports["lb-phone"]:GetConfig().PhoneNumber.Length then
+            number = Utils.GenerateNewNumber()
+        end
 
         local metadata = {
             lbPhoneNumber = number,
