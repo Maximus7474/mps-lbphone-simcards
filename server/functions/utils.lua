@@ -27,7 +27,8 @@ function Utils.GenerateSerialNumber(length)
 
     local serial = ''
     for i = 1, length do
-        serial = serial .. charset:sub(math.random(1, #charset), 1)
+        local r = math.random(1, #charset)
+        serial = serial .. charset:sub(r, r)
     end
 
     return serial
