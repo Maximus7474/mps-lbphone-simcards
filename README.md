@@ -7,6 +7,8 @@
 
 > [!NOTE]
 > This resource is still in beta phase, breaking changes can occur without notice.
+> This resoruce works only with lb-phone
+> This resoruce takes the data lb-phone/config/config.lua ```Config.DefaultLocale = "sv"``` for language.
 
 If you want to contribute please refer to the [Contributing Guidelines](https://github.com/Maximus7474/lb-phone-simcards/blob/main/CONTRIBUTING.md) before opening an issue or pull-request.
 
@@ -42,4 +44,4 @@ end)
 > ESX:
 ```sql
 INSERT INTO `esx-scripting-server`.`items` (`name`, `label`) VALUES ('simcard', 'Sim Card');
-```
+
