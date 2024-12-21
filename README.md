@@ -5,9 +5,16 @@
 > - [ ] Add Other Frameworks
 > - [ ] Add Other Inventories
 
+> [!NOTE]
+> This resource is still in beta phase, breaking changes can occur without notice.
+
+If you want to contribute please refer to the [Contributing Guidelines](https://github.com/Maximus7474/lb-phone-simcards/blob/main/CONTRIBUTING.md) before opening an issue or pull-request.
+
 ## Setup
 
-Add the following code into `@lb-phone/client/custom/functions/functions.lua` at the end of the file:
+1. Download and install [ox_lib](https://github.com/overextended/ox_lib/releases)
+
+2. Add the following code into `@lb-phone/client/custom/functions/functions.lua` at the end of the file:
 ```lua
 CreateThread(function ()
     local timeout = 50
