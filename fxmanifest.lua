@@ -26,4 +26,5 @@ server_scripts {
 
 dependancies {
     'lb-phone',
+    'ox_lib'
 }
