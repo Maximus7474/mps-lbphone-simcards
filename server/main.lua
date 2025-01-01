@@ -18,7 +18,7 @@ if Inventory.RegisterItemCB then
             if Config.Item.Unique then
                 if newNumber then
                     Inventory.SetNewNumber(source, Config.Item.Name, currentNumber, newNumber)
-                    MySQL.insert.await('INSERT INTO phone_phones (id, owner_id, phone_number) VALUES (?, ?, ?)', {
+                    MySQL.insert.await('INSERT IGNORE INTO phone_phones (id, owner_id, phone_number) VALUES (?, ?, ?)', {
                         Utils.GenerateSerialNumber(5), Framework.GetIdentifier(source), newNumber
                     })
                 else
