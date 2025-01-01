@@ -10,6 +10,7 @@ if Inventory.RegisterItemCB then
     Inventory.RegisterItemCB(
         function (source, newNumber, slot)
             local currentNumber = exports['lb-phone']:GetEquippedPhoneNumber(source)
+            local identifier = Framework.GetIdentifier(source)
 
             if Config.SimCard.ReplaceSimCardNumber then
                 Inventory.UpdateSimCardNumber(source, slot, currentNumber)
@@ -19,20 +20,25 @@ if Inventory.RegisterItemCB then
                 if newNumber then
                     Inventory.SetNewNumber(source, Config.Item.Name, currentNumber, newNumber)
                     MySQL.insert.await('INSERT IGNORE INTO phone_phones (id, owner_id, phone_number) VALUES (?, ?, ?)', {
-                        Utils.GenerateSerialNumber(5), Framework.GetIdentifier(source), newNumber
+                        Utils.GenerateSerialNumber(5), identifier, newNumber
                     })
                 else
                     Inventory.ClearCurrentNumber(source, Config.Item.Name, currentNumber)
                 end
 
-                MySQL.update.await('UPDATE phone_phones SET id = ? WHERE phone_number = ? AND id = ?', {currentNumber, currentNumber, Framework.GetIdentifier(source)})
+                MySQL.update.await('UPDATE phone_phones SET id = ? WHERE phone_number = ? AND id = ?', {currentNumber, currentNumber, identifier})
 
-                local rows = MySQL.update.await('DELETE FROM phone_last_phone WHERE id = ?', {Framework.GetIdentifier(source)})
+                local rows = MySQL.update.await('DELETE FROM phone_last_phone WHERE id = ?', {})
                 success = rows == 1
             else
                 local rows = MySQL.update.await('UPDATE phone_phones SET id = ? WHERE phone_number = ?', {currentNumber, currentNumber})
                 success = rows == 1
             end
+
+            if not success then return end
+
+            local rows = MySQL.update.await('INSERT IGNORE INTO phone_last_phone (id, phone_number) VALUES (?, ?) ON DUPLICATE KEY UPDATE phone_number = VALUES(phone_number)', {identifier, newNumber})
+            success = rows == 1
 
             if not success then return end
 
