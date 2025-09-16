@@ -71,4 +71,4 @@ elseif Framework.RegisterUsableItem then
     )
 end
 
-lib.versionCheck('Maximus7474/lb-phone-simcards')
+lib.versionCheck('Maximus7474/mps-lbphone-simcards')
