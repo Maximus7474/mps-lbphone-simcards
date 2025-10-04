@@ -36,7 +36,7 @@ end)
         stack = false,
         close = true,
         consume = 0,
-        server = { export = "lb-phone-simcards.simcard" },
+        server = { export = "mps-lbphone-simcards.simcard" },
     }
 ```
 > ESX:
